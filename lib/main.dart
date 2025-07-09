@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:syriagoal/feature/bestplayers/view/best_player_screen.dart';
 import 'package:syriagoal/feature/home/view/splash_screen.dart';
@@ -5,9 +6,13 @@ import 'package:syriagoal/feature/intro/view/intro_screen.dart';
 import 'package:syriagoal/feature/home/view/home_screen.dart';
 import 'package:syriagoal/feature/standing/view/standing_screen.dart';
 import 'package:syriagoal/feature/settings/view/setting_screen.dart';
+import 'package:syriagoal/firebase_options.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
