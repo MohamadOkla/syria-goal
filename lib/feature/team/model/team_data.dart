@@ -1,347 +1,55 @@
-final List<Map<String, dynamic>> teams = [
-  {
-    'name': 'تشرين',
-    'logo': 'assets/images/tishreen.jpeg',
-    'coach': 'ايهم العباس',
-    'players': [
-      {
-        'name': 'عبد الرحمن بركات',
-        'number': 9,
-        'position': 'مهاجم',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'محمود البحر',
-        'number': 10,
-        'position': 'وسط',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'يوسف قلفا',
-        'number': 7,
-        'position': 'جناح',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'محمد زين',
-        'number': 5,
-        'position': 'مدافع',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'عمر جنيات',
-        'number': 2,
-        'position': 'ظهير',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'أحمد الأشقر',
-        'number': 8,
-        'position': 'وسط دفاعي',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'إيهاب الحمصي',
-        'number': 1,
-        'position': 'حارس',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-    ],
-  },
-  {
-    'name': 'الجيش',
-    'logo': 'assets/images/aljaysh.jpeg',
-    'coach': 'حسين عفش',
-    'players': [
-      {
-        'name': 'حميد ميدو',
-        'number': 6,
-        'position': 'وسط',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'محمد الواكد',
-        'number': 11,
-        'position': 'مهاجم',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'علي رمضان',
-        'number': 5,
-        'position': 'مدافع',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'حسين جويد',
-        'number': 13,
-        'position': 'وسط',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'زكريا حنان',
-        'number': 1,
-        'position': 'حارس',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-    ],
-  },
-  {
-    'name': 'الكرامة',
-    'logo': 'assets/images/alkaramah.jpeg',
-    'coach': 'محمد اليوسف',
-    'players': [
-      {
-        'name': 'حسام نكدلي',
-        'number': 8,
-        'position': 'وسط',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'نصوح نكدلي',
-        'number': 9,
-        'position': 'مهاجم',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'عبد الهادي شلحة',
-        'number': 4,
-        'position': 'مدافع',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'علاء الدالي',
-        'number': 7,
-        'position': 'جناح',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'مهند أسعد',
-        'number': 3,
-        'position': 'قلب دفاع',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'قصي حبيب',
-        'number': 1,
-        'position': 'حارس',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-    ],
-  },
-  {
-    'name': 'الوحدة',
-    'logo': 'assets/images/alwahda.jpeg',
-    'coach': 'عمار الشمالي',
-    'players': [
-      {
-        'name': 'عبد الإله حفيان',
-        'number': 3,
-        'position': 'مدافع',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'محمد الحلاق',
-        'number': 10,
-        'position': 'وسط',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'أنس العوض',
-        'number': 9,
-        'position': 'مهاجم',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'عدي جفال',
-        'number': 7,
-        'position': 'صانع ألعاب',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'سامر السالم',
-        'number': 6,
-        'position': 'وسط دفاعي',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-    ],
-  },
-  {
-    'name': 'جبلة',
-    'logo': 'assets/images/jabla.jpeg',
-    'coach': 'اسامة الحسن',
-    'players': [
-      {
-        'name': 'وسيم عبدو',
-        'number': 2,
-        'position': 'مدافع',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'عبد الكريم علي',
-        'number': 8,
-        'position': 'وسط',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'زكريا رمضان',
-        'number': 17,
-        'position': 'هجوم',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'أيهم شحادة',
-        'number': 4,
-        'position': 'مدافع',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'مجد الدين الحسين',
-        'number': 1,
-        'position': 'حارس',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-    ],
-  },
-  {
-    'name': 'الشرطة',
-    'logo': 'assets/images/alshurtah.jpeg',
-    'coach': 'محمد قويض',
-    'players': [
-      {
-        'name': 'طارق عيسى',
-        'number': 5,
-        'position': 'قلب دفاع',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'مازن الحسين',
-        'number': 11,
-        'position': 'صانع ألعاب',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'عدي جفال',
-        'number': 7,
-        'position': 'مهاجم',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'صالح الداوود',
-        'number': 6,
-        'position': 'ظهير أيمن',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'جمال يوسف',
-        'number': 1,
-        'position': 'حارس',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-    ],
-  },
-  {
-    'name': 'حطين',
-    'logo': 'assets/images/hutteen.jpeg',
-    'coach': 'محمد عقيل',
-    'players': [
-      {
-        'name': 'حسن خضور',
-        'number': 13,
-        'position': 'وسط',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'نورس شاليش',
-        'number': 6,
-        'position': 'مدافع',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'أنس بوطة',
-        'number': 10,
-        'position': 'مهاجم',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'رامي عيسى',
-        'number': 2,
-        'position': 'ظهير أيسر',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'مروان مراد',
-        'number': 1,
-        'position': 'حارس',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-    ],
-  },
-  {
-    'name': 'الحرية',
-    'logo': 'assets/images/alhurriya.jpeg',
-    'coach': 'حسام السيد',
-    'players': [
-      {
-        'name': 'وائل عيان',
-        'number': 8,
-        'position': 'وسط',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'جهاد الباعور',
-        'number': 4,
-        'position': 'مدافع',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'عبد الرحمن حمادة',
-        'number': 15,
-        'position': 'مهاجم',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'محمد المصري',
-        'number': 3,
-        'position': 'مدافع',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-    ],
-  },
-  {
-    'name': 'الطليعة',
-    'logo': 'assets/images/altaliyeh.jpeg',
-    'coach': 'محمد بندر',
-    'players': [
-      {
-        'name': 'شادي الحموي',
-        'number': 9,
-        'position': 'مهاجم',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'فادي بيكو',
-        'number': 7,
-        'position': 'جناح',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'نذير الغساني',
-        'number': 10,
-        'position': 'صانع ألعاب',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'وسام مرهج',
-        'number': 6,
-        'position': 'وسط',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-      {
-        'name': 'مؤيد خليفة',
-        'number': 1,
-        'position': 'حارس',
-        'photo': 'assets/images/default_photo.jpeg',
-      },
-    ],
-  },
-];
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class Player {
+  final String name;
+  final int number;
+  final String position;
+  final String photo;
+
+  Player({
+    required this.name,
+    required this.number,
+    required this.position,
+    required this.photo,
+  });
+
+  factory Player.fromMap(Map<String, dynamic> data) {
+    return Player(
+      name: data['name'] ?? '',
+      number: data['number'] ?? 0,
+      position: data['position'] ?? '',
+      photo: data['photo'] ?? '',
+    );
+  }
+}
+
+class Team {
+  final String name;
+  final String logo;
+  final String coach;
+  final List<Player> players;
+
+  Team({
+    required this.name,
+    required this.logo,
+    required this.coach,
+    required this.players,
+  });
+
+  factory Team.fromDocument(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
+    final playersData = data['players'] as List<dynamic>? ?? [];
+
+    return Team(
+      name: data['name'] ?? '',
+      logo: data['logo'] ?? '',
+      coach: data['coach'] ?? '',
+      players: playersData.map((playerData) => Player.fromMap(playerData)).toList(),
+    );
+  }
+}
+
+Future<List<Team>> fetchTeams() async {
+  final snapshot = await FirebaseFirestore.instance.collection('teams').get();
+  return snapshot.docs.map((doc) => Team.fromDocument(doc)).toList();
+}

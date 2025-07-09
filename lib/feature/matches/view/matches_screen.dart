@@ -1,35 +1,64 @@
 import 'package:flutter/material.dart';
-import '../model/match_data.dart';
-import '../../team/model/team_data.dart';
+  import 'package:syriagoal/services/match_service.dart';
+import '../model/match_model.dart';
 import '../../components/match_card.dart';
 
 class MatchesScreen extends StatelessWidget {
   const MatchesScreen({super.key});
 
-  Map<String, dynamic>? getTeamByName(String name) {
-    try {
-      return teams.firstWhere((team) => team['name'] == name);
-    } catch (e) {
-      return null;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    final matchService = MatchService();
+
     return Scaffold(
-    
-      body: ListView.builder(
-        itemCount: matchData.length,
-        itemBuilder: (context, index) {
-          final match = matchData[index];
+      body: FutureBuilder<List<MatchModel>>(
+        future: matchService.fetchMatches(),
+        builder: (context, matchSnapshot) {
+          if (matchSnapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (matchSnapshot.hasError) {
+            return Center(
+                child: Text("خطأ في تحميل المباريات: ${matchSnapshot.error}"));
+          }
+          final matches = matchSnapshot.data;
+          if (matches == null || matches.isEmpty) {
+            return const Center(child: Text("لا توجد مباريات حالياً."));
+          }
 
-          final team1 = getTeamByName(match['team1']);
-          final team2 = getTeamByName(match['team2']);
+          return FutureBuilder<Map<String, Map<String, dynamic>>>(
+            future: matchService.fetchTeamsMap(),
+            builder: (context, teamSnapshot) {
+              if (teamSnapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              if (teamSnapshot.hasError) {
+                return Center(
+                    child: Text("خطأ في تحميل الفرق: ${teamSnapshot.error}"));
+              }
+              final teamsMap = teamSnapshot.data ?? {};
 
-          return MatchCard(
-            match: match,
-            team1Data: team1,
-            team2Data: team2,
+              return ListView.builder(
+                itemCount: matches.length,
+                itemBuilder: (context, index) {
+                  final match = matches[index];
+                  final team1 = teamsMap[match.team1];
+                  final team2 = teamsMap[match.team2];
+
+                  return MatchCard(
+                    match: {
+                      'team1': match.team1,
+                      'team2': match.team2,
+                      'date': match.date,
+                      'time': match.time,
+                      'result': match.result,
+                    },
+                    team1Data: team1,
+                    team2Data: team2,
+                  );
+                },
+              );
+            },
           );
         },
       ),

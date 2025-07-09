@@ -9,8 +9,9 @@ import 'package:syriagoal/feature/settings/view/setting_screen.dart';
 import 'package:syriagoal/firebase_options.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+    options: DefaultFirebaseOptions.android,
   );
   runApp(MyApp());
 }

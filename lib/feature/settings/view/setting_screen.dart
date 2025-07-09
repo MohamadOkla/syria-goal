@@ -33,7 +33,6 @@ class SettingScreen extends StatelessWidget {
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 12),
-
           ListTile(
             leading: const Icon(Icons.language),
             title: const Text('اللغة'),
@@ -45,13 +44,10 @@ class SettingScreen extends StatelessWidget {
                   child: Text(lang),
                 );
               }).toList(),
-              onChanged: (value) {
-
-              },
+              onChanged: (value) {},
             ),
           ),
           const Divider(),
-
           SwitchListTile(
             secondary: const Icon(Icons.dark_mode),
             title: const Text('الوضع الليلي'),
@@ -59,7 +55,6 @@ class SettingScreen extends StatelessWidget {
             onChanged: onThemeChanged,
           ),
           const Divider(),
-
           ListTile(
             leading: const Icon(Icons.info_outline),
             title: const Text('حول التطبيق'),
@@ -74,7 +69,6 @@ class SettingScreen extends StatelessWidget {
               );
             },
           ),
-
           ListTile(
             leading: const Icon(Icons.contact_mail),
             title: const Text('اتصل بنا'),
