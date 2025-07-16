@@ -23,7 +23,6 @@ class MatchCard extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // الفريق الأول
             Column(
               children: [
                 if (team1Data != null)
@@ -40,7 +39,6 @@ class MatchCard extends StatelessWidget {
               ],
             ),
 
-            // النتيجة أو التاريخ
             Column(
               children: [
                 Text(
@@ -59,7 +57,6 @@ class MatchCard extends StatelessWidget {
               ],
             ),
 
-            // الفريق الثاني
             Column(
               children: [
                 if (team2Data != null)
