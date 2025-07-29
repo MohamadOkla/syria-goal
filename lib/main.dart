@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart'; 
 import 'package:syriagoal/feature/bestplayers/view/best_player_screen.dart';
 import 'package:syriagoal/feature/home/view/splash_screen.dart';
 import 'package:syriagoal/feature/intro/view/intro_screen.dart';
@@ -7,54 +8,56 @@ import 'package:syriagoal/feature/home/view/home_screen.dart';
 import 'package:syriagoal/feature/standing/view/standing_screen.dart';
 import 'package:syriagoal/feature/settings/view/setting_screen.dart';
 import 'package:syriagoal/firebase_options.dart';
+import 'package:syriagoal/utils/theme_provider.dart'; 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.android,
   );
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  ThemeMode _themeMode = ThemeMode.light;
-
-  void toggleTheme(bool isDark) {
-    setState(() {
-      _themeMode = isDark ? ThemeMode.dark : ThemeMode.light;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
-      themeMode: _themeMode,
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const SplashScreen(),
-        '/intro': (context) => const IntroScreen(),
-        '/home': (context) => const HomeScreen(),
-        '/standing': (context) => StandingsScreen(),
-        '/bestPlayers': (context) => BestPlayersScreen(),
-        '/settings': (context) => SettingScreen(
-              isDarkMode: _themeMode == ThemeMode.dark,
-              onThemeChanged: toggleTheme,
-            ),
-      },
-      builder: (context, child) {
-        return Directionality(
-          textDirection: TextDirection.rtl,
-          child: child!,
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData.light(),
+          darkTheme: ThemeData.dark(),
+          themeMode: themeProvider.themeMode, 
+          initialRoute: '/',
+          routes: {
+            '/': (context) => const SplashScreen(),
+            '/intro': (context) => const IntroScreen(),
+            '/home': (context) => const HomeScreen(),
+            '/standing': (context) => StandingsScreen(),
+            '/bestPlayers': (context) => BestPlayersScreen(),
+            '/settings': (context) {
+              final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+              return SettingScreen(
+                isDarkMode: themeProvider.themeMode == ThemeMode.dark,
+                onThemeChanged: (bool isDark) {
+                  themeProvider.toggleTheme(isDark);
+                },
+              );
+            },
+          },
+          builder: (context, child) {
+            return Directionality(
+              textDirection: TextDirection.rtl,
+              child: child!,
+            );
+          },
         );
       },
     );
