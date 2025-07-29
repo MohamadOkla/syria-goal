@@ -12,6 +12,22 @@ class MatchCard extends StatelessWidget {
     super.key,
   });
 
+  Widget _buildTeamAvatar(Map<String, dynamic>? teamData) {
+    String? logoPath = teamData?['logo'];
+    if (logoPath == null || logoPath.isEmpty) {
+      return CircleAvatar(
+        backgroundImage: AssetImage('assets/images/default_photo.jpeg'),
+        radius: 28,
+        backgroundColor: Colors.grey.shade200,
+      );
+    }
+    return CircleAvatar(
+      backgroundImage: NetworkImage(logoPath),
+      radius: 28,
+      backgroundColor: Colors.grey.shade200,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -25,12 +41,7 @@ class MatchCard extends StatelessWidget {
           children: [
             Column(
               children: [
-                if (team1Data != null)
-                  CircleAvatar(
-                    backgroundImage: AssetImage(team1Data!['logo']),
-                    radius: 28,
-                    backgroundColor: Colors.grey.shade200,
-                  ),
+                _buildTeamAvatar(team1Data),
                 const SizedBox(height: 8),
                 Text(
                   team1Data != null ? team1Data!['name'] : match['team1'],
@@ -38,7 +49,6 @@ class MatchCard extends StatelessWidget {
                 ),
               ],
             ),
-
             Column(
               children: [
                 Text(
@@ -56,15 +66,9 @@ class MatchCard extends StatelessWidget {
                 ),
               ],
             ),
-
             Column(
               children: [
-                if (team2Data != null)
-                  CircleAvatar(
-                    backgroundImage: AssetImage(team2Data!['logo']),
-                    radius: 28,
-                    backgroundColor: Colors.grey.shade200,
-                  ),
+                _buildTeamAvatar(team2Data),
                 const SizedBox(height: 8),
                 Text(
                   team2Data != null ? team2Data!['name'] : match['team2'],
