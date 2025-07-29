@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
 import 'package:syriagoal/feature/bestplayers/view/best_player_screen.dart';
 import 'package:syriagoal/feature/standing/view/standing_screen.dart';
 import 'package:syriagoal/feature/widgets/app_bar_widget.dart';
-import 'package:syriagoal/utils/constant.dart';
 import 'package:syriagoal/feature/widgets/drawer_widget.dart';
 import 'package:syriagoal/feature/matches/view/matches_screen.dart';
+import 'package:syriagoal/utils/constant.dart';
+import 'package:syriagoal/utils/home_state_provider.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  int selectedTeamIndex = 0;
-  int _currentIndex = 0;
-
-  final List<String> _appBarTitles = [
+  final List<String> _appBarTitles = const [
     'الدوري السوري الممتاز',
     'المباريات',
     'جدول الترتيب',
@@ -27,13 +21,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final homeState = Provider.of<HomeStateProvider>(context);
+    final selectedTeamIndex = homeState.selectedTeamIndex;
+    final currentIndex = homeState.currentIndex;
+
     return Scaffold(
       drawer: const DrawerWidget(),
-      appBar: AppBarWidget(appBarTitle: _appBarTitles[_currentIndex]),
+      appBar: AppBarWidget(appBarTitle: _appBarTitles[currentIndex]),
       body: IndexedStack(
-        index: _currentIndex,
+        index: currentIndex,
         children: [
-          _buildTeamsScreen(),
+          _buildTeamsScreen(context, selectedTeamIndex),
           const MatchesScreen(),
           StandingsScreen(),
           BestPlayersScreen(),
@@ -43,8 +41,8 @@ class _HomeScreenState extends State<HomeScreen> {
         selectedItemColor: Constant.primaryColor,
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
-        currentIndex: _currentIndex,
-        onTap: (i) => setState(() => _currentIndex = i),
+        currentIndex: currentIndex,
+        onTap: (i) => homeState.setCurrentIndex(i),
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'الرئيسية'),
           BottomNavigationBarItem(
@@ -58,9 +56,11 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildTeamsScreen() {
+  Widget _buildTeamsScreen(BuildContext context, int selectedTeamIndex) {
+    final homeState = Provider.of<HomeStateProvider>(context, listen: false);
+
     return FutureBuilder<QuerySnapshot>(
-      future: FirebaseFirestore.instance.collection('teams').get(),
+      future: FirebaseFirestore.instance.collection('team').get(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
@@ -94,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemBuilder: (context, idx) {
                     final team = teamsData[idx].data() as Map<String, dynamic>;
                     return GestureDetector(
-                      onTap: () => setState(() => selectedTeamIndex = idx),
+                      onTap: () => homeState.setSelectedTeamIndex(idx),
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 300),
                         width: 100,
@@ -121,8 +121,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             CircleAvatar(
                               radius: 30,
-                              backgroundImage:
-                                  AssetImage(team['logo'] ?? 'assets/images/default_photo.jpeg'),
+                              backgroundImage: AssetImage(team['logo'] ??
+                                  'assets/images/default_photo.jpeg'),
                             ),
                             const SizedBox(height: 8),
                             Text(team['name'] ?? '',
@@ -165,11 +165,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 radius: 24,
                                 backgroundColor:
                                     Constant.primaryColor.withOpacity(0.1),
-                                child: Icon(
-                                  Icons.person,
-                                  size: 28,
-                                  color: Constant.primaryColor,
-                                ),
+                                child: Icon(Icons.person,
+                                    size: 28, color: Constant.primaryColor),
                               ),
                               title: Text(player['name'] ?? ''),
                               subtitle: Text(player['position'] ?? ''),
