@@ -16,7 +16,7 @@ class BestPlayersScreen extends StatelessWidget {
             return Center(child: CircularProgressIndicator());
 
           if (snapshot.hasError)
-            return Center(child: Text('حدث خطأ في جلب البيانات'));
+            return  Center(child: Text('حدث خطأ في جلب البيانات'));
 
           final players = snapshot.data ?? [];
 
