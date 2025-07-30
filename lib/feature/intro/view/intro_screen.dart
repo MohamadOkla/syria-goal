@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:syriagoal/feature/intro/controller/intro_provider.dart';
 
-class IntroScreen extends StatefulWidget {
+class IntroScreen extends StatelessWidget {
   const IntroScreen({super.key});
 
-  @override
-  State<IntroScreen> createState() => _IntroScreenState();
-}
-
-class _IntroScreenState extends State<IntroScreen> {
-  final PageController _controller = PageController();
-  // ignore: unused_field
-  int _currentIndex = 0;
-
-  List<Map<String, String>> introPages = [
+  final List<Map<String, String>> introPages = const [
     {
       'title': 'مرحباً بك في الدوري السوري',
       'subtitle': 'تابع أحدث المباريات ونتائج الفرق المفضلة لديك.',
@@ -30,21 +23,19 @@ class _IntroScreenState extends State<IntroScreen> {
     },
   ];
 
-  void goToMainScreen() {
+  void goToMainScreen(BuildContext context) {
     Navigator.pushReplacementNamed(context, '/home');
   }
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<IntroProvider>(context);
+
     return Scaffold(
       body: PageView.builder(
-        controller: _controller,
+        controller: provider.pageController,
         itemCount: introPages.length,
-        onPageChanged: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
+        onPageChanged: provider.setCurrentIndex,
         itemBuilder: (context, index) {
           final page = introPages[index];
           return Container(
@@ -61,7 +52,9 @@ class _IntroScreenState extends State<IntroScreen> {
                 Text(
                   page['title']!,
                   style: const TextStyle(
-                      fontSize: 24, fontWeight: FontWeight.bold),
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 16),
@@ -71,32 +64,26 @@ class _IntroScreenState extends State<IntroScreen> {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 40),
-                if (index == introPages.length - 1)
-                  Container(
-                    width: MediaQuery.sizeOf(context).width * 0.3,
-                    child: OutlinedButton(
-                      onPressed: () =>
-                          Navigator.pushReplacementNamed(context, '/home'),
-                      child: Center(child: const Text('ابدأ الآن')),
+                SizedBox(
+                  width: MediaQuery.sizeOf(context).width * 0.3,
+                  child: OutlinedButton(
+                    onPressed: () {
+                      if (index == introPages.length - 1) {
+                        goToMainScreen(context);
+                      } else {
+                        provider.nextPage();
+                      }
+                    },
+                    child: Center(
+                      child: Text(
+                        index == introPages.length - 1
+                            ? 'ابدأ الآن'
+                            : 'التالي',
+                        style: const TextStyle(color: Colors.black),
+                      ),
                     ),
-                  )
-                else
-                  Container(
-                    width: MediaQuery.sizeOf(context).width * 0.3,
-                    child: OutlinedButton(
-                      onPressed: () {
-                        _controller.nextPage(
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.easeInOut,
-                        );
-                      },
-                      child: Center(
-                          child: const Text(
-                        'التالي',
-                        style: TextStyle(color: Colors.black),
-                      )),
-                    ),
-                  )
+                  ),
+                ),
               ],
             ),
           );

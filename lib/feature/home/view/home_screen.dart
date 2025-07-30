@@ -7,7 +7,7 @@ import 'package:syriagoal/feature/widgets/app_bar_widget.dart';
 import 'package:syriagoal/feature/widgets/drawer_widget.dart';
 import 'package:syriagoal/feature/matches/view/matches_screen.dart';
 import 'package:syriagoal/utils/constant.dart';
-import 'package:syriagoal/utils/home_state_provider.dart';
+import 'package:syriagoal/feature/home/controller/home_state_provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syriagoal/feature/bestplayers/view/best_player_screen.dart';
 import 'package:syriagoal/feature/home/view/splash_screen.dart';
+import 'package:syriagoal/feature/intro/controller/intro_provider.dart';
 import 'package:syriagoal/feature/intro/view/intro_screen.dart';
 import 'package:syriagoal/feature/home/view/home_screen.dart';
 import 'package:syriagoal/feature/standing/view/standing_screen.dart';
 import 'package:syriagoal/feature/settings/view/setting_screen.dart';
 import 'package:syriagoal/firebase_options.dart';
-import 'package:syriagoal/utils/home_state_provider.dart';
+import 'package:syriagoal/feature/home/controller/home_state_provider.dart';
 import 'package:syriagoal/utils/theme_provider.dart';
 
 void main() async {
@@ -21,6 +22,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => HomeStateProvider()),
+        ChangeNotifierProvider(create: (_) => IntroProvider()),
       ],
       child: const MyApp(),
     ),
