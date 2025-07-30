@@ -10,7 +10,7 @@ import 'package:syriagoal/feature/standing/view/standing_screen.dart';
 import 'package:syriagoal/feature/settings/view/setting_screen.dart';
 import 'package:syriagoal/firebase_options.dart';
 import 'package:syriagoal/feature/home/controller/home_state_provider.dart';
-import 'package:syriagoal/utils/theme_provider.dart';
+import 'package:syriagoal/feature/settings/controller/theme_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
